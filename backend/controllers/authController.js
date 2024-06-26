@@ -104,7 +104,7 @@ export const getMe = async (req, res) => {
     const user = await User.findById(req.user._id).select("-password")
     res.status(401).json(user)
   } catch (error) {
-    console.log("Error in Login controller", error.message);
+    console.log("Error in getMe controller", error.message);
     return res.status(500).json({ error: "Internal Server error" })
   }
 }
