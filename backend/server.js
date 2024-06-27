@@ -3,9 +3,9 @@ import dotenv from "dotenv"
 import cookieParser from "cookie-parser";
 import { v2 as cloudinary } from "cloudinary";
 
-import authRoutes from "./routes/authRoutes.js"
-import userRoutes from "./routes/userRoutes.js"
-import postRoutes from "./routes/postRoutes.js"
+import authRoutes from "./routes/authRoute.js"
+import userRoutes from "./routes/userRoute.js"
+import postRoutes from "./routes/postRoute.js"
 
 import connectMongoDB from "./db/connectMongoDB.js";
 
@@ -19,10 +19,6 @@ cloudinary.config({
 
 const app = express()
 const PORT = process.env.PORT || 5000
-
-app.get("/", (req, res) => {
-  res.send('Hello World!')
-})
 
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
