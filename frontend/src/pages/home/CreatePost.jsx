@@ -44,6 +44,7 @@ const CreatePost = () => {
 				onSubmit={handleSubmit}
 			>
 				<textarea
+					name='tweet'
 					className='textarea w-full p-0 text-lg resize-none border-none focus:outline-none  border-gray-800'
 					placeholder='What is happening?!'
 					value={text}
@@ -77,6 +78,8 @@ const CreatePost = () => {
 						type='file'
 						hidden
 						ref={imgRef}
+						accept='images/*'
+						name='postImage'
 						onChange={handleImgChange}
 					/>
 					<button className='btn btn-primary rounded-full btn-sm text-white px-4'>

@@ -45,6 +45,7 @@ const EditProfileModal = () => {
 								className='flex-1 input border border-gray-700 rounded p-2 input-md'
 								value={formData.fullName}
 								name='fullName'
+								autoComplete='name'
 								onChange={handleInputChange}
 							/>
 							<input
@@ -53,6 +54,7 @@ const EditProfileModal = () => {
 								className='flex-1 input border border-gray-700 rounded p-2 input-md'
 								value={formData.username}
 								name='username'
+								autoComplete='username'
 								onChange={handleInputChange}
 							/>
 						</div>
@@ -63,6 +65,7 @@ const EditProfileModal = () => {
 								className='flex-1 input border border-gray-700 rounded p-2 input-md'
 								value={formData.email}
 								name='email'
+								autoComplete='email'
 								onChange={handleInputChange}
 							/>
 							<textarea
@@ -80,6 +83,7 @@ const EditProfileModal = () => {
 								className='flex-1 input border border-gray-700 rounded p-2 input-md'
 								value={formData.currentPassword}
 								name='currentPassword'
+								autoComplete='current-password'
 								onChange={handleInputChange}
 							/>
 							<input
@@ -88,6 +92,7 @@ const EditProfileModal = () => {
 								className='flex-1 input border border-gray-700 rounded p-2 input-md'
 								value={formData.newPassword}
 								name='newPassword'
+								autoComplete='new-password'
 								onChange={handleInputChange}
 							/>
 						</div>
