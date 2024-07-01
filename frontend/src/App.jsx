@@ -10,9 +10,19 @@ import NotificationPage from "./pages/notification/NotificationPage";
 import ProfilePage from "./pages/profile/ProfilePage";
 import Sidebar from "./components/common/Sidebar";
 import RightPanel from "./components/common/RightPanel";
+import LoadingSpinner from "./components/common/LoadingSpinner";
 
 const App = () => {
-	const { data: authUser } = useAuthUser();
+	const { data: authUser, isLoading } = useAuthUser();
+
+	if (isLoading) {
+		return (
+			<div className='h-screen flex justify-center items-center'>
+				<LoadingSpinner size='lg' />
+			</div>
+		);
+	}
+
 	return (
 		<div className='flex max-w-6xl mx-auto'>
 			{authUser && <Sidebar />}
