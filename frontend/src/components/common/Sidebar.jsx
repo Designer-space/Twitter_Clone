@@ -1,16 +1,44 @@
 import XSvg from "../svgs/X";
-
 import { MdHomeFilled } from "react-icons/md";
 import { IoNotifications } from "react-icons/io5";
 import { FaUser } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { BiLogOut } from "react-icons/bi";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import toast from "react-hot-toast";
 
 const Sidebar = () => {
-	const data = {
-		fullName: "John Doe",
-		username: "johndoe",
-		profileImg: "/avatars/boy1.png",
+	const queryClient = useQueryClient();
+
+	const { data } = useQuery({ queryKey: ["authUser"] });
+
+	const { mutate } = useMutation({
+		mutationFn: async () => {
+			try {
+				const res = await fetch("/api/auth/logout", {
+					method: "POST",
+				});
+
+				const data = await res.json();
+				if (!res.ok) {
+					throw new Error(data.error || "Something went wrong");
+				}
+			} catch (error) {
+				throw error;
+			}
+		},
+		onSuccess: () => {
+			toast.success("Logout Successful");
+			queryClient.invalidateQueries({ queryKey: ["authUser"] });
+		},
+		onError: () => {
+			toast.error("Something went wrong");
+		},
+	});
+
+	const handleClick = (e) => {
+		e.preventDefault();
+		mutate();
 	};
 
 	return (
@@ -69,7 +97,9 @@ const Sidebar = () => {
 								</p>
 								<p className='text-slate-500 text-sm'>@{data?.username}</p>
 							</div>
-							<BiLogOut className='w-5 h-5 cursor-pointer' />
+							<button onClick={(e) => handleClick(e)}>
+								<BiLogOut className='w-5 h-5 cursor-pointer' />
+							</button>
 						</div>
 					</Link>
 				)}
