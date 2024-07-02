@@ -22,10 +22,10 @@ const Post = ({ post }) => {
 
 	const isMyPost = authUser._id === post.user._id;
 
-	const formattedDate = "1h";
+	const formattedDate = formatPostDate(post.createdAt);
 
 	const { mutate: deletePost, isPending: isDeleting } = useMutation({
-		mutationFn: async (id) => {
+		mutationFn: async () => {
 			try {
 				const res = await fetch(`/api/posts/${id}`, {
 					method: "DELETE",
@@ -45,7 +45,7 @@ const Post = ({ post }) => {
 	});
 
 	const { mutate: likePost, isPending: isLiking } = useMutation({
-		mutationFn: async (id) => {
+		mutationFn: async () => {
 			try {
 				const res = await fetch(`/api/posts/like/${post._id}`, {
 					method: "POST",
@@ -75,7 +75,7 @@ const Post = ({ post }) => {
 	});
 
 	const { mutate: commentPost, isPending: isCommenting } = useMutation({
-		mutationFn: async (id) => {
+		mutationFn: async () => {
 			try {
 				const res = await fetch(`/api/posts/comment/${post._id}`, {
 					method: "POST",
