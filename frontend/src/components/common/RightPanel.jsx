@@ -1,9 +1,13 @@
 import { Link } from "react-router-dom";
 import RightPanelSkeleton from "../skeletons/RightPanelSkeleton";
 import { useQuery } from "@tanstack/react-query";
+import useFollowUnfollow from "../../hooks/useFollowUnfollow";
+import LoadingSpinner from "./LoadingSpinner";
+import { useState } from "react";
 
 const RightPanel = () => {
 	// /api/users/suggested
+	const [loading, setLoading] = useState({});
 
 	const { data: suggestedUsers, isLoading } = useQuery({
 		queryKey: ["suggestedUsers"],
@@ -21,6 +25,17 @@ const RightPanel = () => {
 			}
 		},
 	});
+
+	const { followUnfollow } = useFollowUnfollow();
+
+	const handleFollowUnfollow = async (userId) => {
+		setLoading((prev) => ({ ...prev, [userId]: true }));
+		try {
+			await followUnfollow(userId);
+		} finally {
+			setLoading((prev) => ({ ...prev, [userId]: false }));
+		}
+	};
 
 	return (
 		<div className='hidden lg:block my-4 mx-2'>
@@ -61,9 +76,17 @@ const RightPanel = () => {
 								<div>
 									<button
 										className='btn bg-white text-black hover:bg-white hover:opacity-90 rounded-full btn-sm'
-										onClick={(e) => e.preventDefault()}
+										onClick={(e) => {
+											e.preventDefault();
+											handleFollowUnfollow(user._id);
+										}}
+										disabled={loading[user._id]}
 									>
-										Follow
+										{loading[user._id] ? (
+											<LoadingSpinner size='sm' />
+										) : (
+											"Follow"
+										)}
 									</button>
 								</div>
 							</Link>
