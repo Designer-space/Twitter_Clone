@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useMutation } from "@tanstack/react-query";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 
 import XSvg from "../../../components/svgs/X";
 import { FaUser } from "react-icons/fa";
@@ -9,6 +9,7 @@ import {
 	MdPassword,
 	MdDriveFileRenameOutline,
 } from "react-icons/md";
+import toast from "react-hot-toast";
 
 const SignUpPage = () => {
 	const [formData, setFormData] = useState({
@@ -37,6 +38,16 @@ const SignUpPage = () => {
 			} catch (error) {
 				throw error;
 			}
+		},
+		onSuccess: () => {
+			toast.success("Account has been created");
+			setFormData({
+				email: "",
+				username: "",
+				fullName: "",
+				password: "",
+			});
+			<Navigate to='/' />;
 		},
 	});
 

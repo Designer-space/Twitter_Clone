@@ -58,7 +58,7 @@ const NotificationPage = () => {
 						<div
 							tabIndex={0}
 							role='button'
-							className='m-1'
+							className='p-3 hover:bg-[#181818] rounded-full'
 						>
 							<IoSettingsOutline className='w-4' />
 						</div>

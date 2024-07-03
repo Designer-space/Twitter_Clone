@@ -119,20 +119,20 @@ const Post = ({ post }) => {
 
 	return (
 		<>
-			<div className='flex gap-2 items-start p-4 border-b border-gray-700'>
+			<div className='flex gap-2 items-start p-4 border-b border-gray-700 text-[.8rem] min-[375px]:text-base'>
 				<div className='avatar'>
 					<Link
 						to={`/profile/${postOwner.username}`}
-						className='w-8 rounded-full overflow-hidden'
+						className='w-6 min-[375px]:w-8 rounded-full overflow-hidden'
 					>
 						<img src={postOwner.profileImg || "/avatar-placeholder.jpg"} />
 					</Link>
 				</div>
 				<div className='flex flex-col flex-1'>
-					<div className='flex gap-2 items-center'>
+					<div className='flex gap-2 items-center '>
 						<Link
 							to={`/profile/${postOwner.username}`}
-							className='font-bold'
+							className='font-bold '
 						>
 							{postOwner.fullName}
 						</Link>
@@ -161,7 +161,7 @@ const Post = ({ post }) => {
 						{post.img && (
 							<img
 								src={post.img}
-								className='h-80 object-contain rounded-lg border border-gray-700'
+								className='m-h-80 aspect-video object-cover rounded-lg border border-gray-700'
 								alt=''
 							/>
 						)}
